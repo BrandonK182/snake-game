@@ -13,13 +13,23 @@ int main()
   int numMoves = 0;
   int apples = 0;
   player aPlayer;
+  
+  /*************************
+  * while loop to keep game running if player 
+  * chooses to continue after winning/losing
+  *****************************/
   while(endGame==false)
   {
+    // displays content about the player and the world around them
     cout<<aPlayer;
+    
+    // CHECKS losing conditions
     if(aPlayer.lose())
     {
       cout<<"GAME OVER!!!"<<endl;
       cout<<"play again? (y) (n)"<<endl;
+      
+      // let's players restart the game
       cin>>choice;
       switch(choice)
       {
@@ -34,8 +44,11 @@ int main()
           cout<<"invalid entry"<<endl;
       }
     }
+    
+    // if the player has not lost the game yet
     else
     {
+      //player changes directions using WASD keys
       cin>>choice;
       switch(choice)
       {
@@ -55,11 +68,15 @@ int main()
           cout<<"invalid move"<<endl;
           break;
       }
+      
+      // CHECKS if player has reached goal after movement
       if(aPlayer.overGoal())
       {
         apples++;
         aPlayer.changeGoal();
       }
+      
+      // CHECKS if player has reached maximum capacity
       if(apples==aPlayer.getCapacity())
       {
         cout<<"you win. play again? (y) (n)"<<endl;
